@@ -3,40 +3,6 @@
 // You will be provided with four different types of data:
 // A CourseInfo object, which looks like this:
 // {
-//   "id": number,
-//   "name": string,
-// }
-
-// An AssignmentGroup object, which looks like this:
-// {
-//   "id": number,
-//   "name": string,
-//   // the ID of the course the assignment group belongs to
-//   "course_id": number,
-//   // the percentage weight of the entire assignment group
-//   "group_weight": number,
-//   "assignments": [AssignmentInfo],
-// }
-
-// Each AssignmentInfo object within the assignments array looks like this:
-// {
-//   "id": number,
-//   "name": string,
-//   // the due date for the assignment
-//   "due_at": Date string,
-//   // the maximum points possible for the assignment
-//   "points_possible": number,
-// }
-
-// An array of LearnerSubmission objects, which each look like this:
-// {
-//     "learner_id": number,
-//     "assignment_id": number,
-//     "submission": {
-//       "submitted_at": Date string,
-//       "score": number
-//     }
-// }
 
 // Your goal is to analyze and transform this data such that the output of your program is an array of objects, each containing the following information in the following format:
 // {
@@ -55,10 +21,9 @@
 //     // the average or the keyed dictionary of scores
 // }
 
-
 // if an AssignmentGroup does not belong to its course (mismatching course_id), your program should throw an error, letting the user know that the input was invalid. Similar data validation should occur elsewhere within the program.
 
-// You should also account for potential errors in the data that your program receives. What if points_possible is 0? You cannot divide by zero. What if a value that you are expecting to be a number is instead a string? 
+// You should also account for potential errors in the data that your program receives. What if points_possible is 0? You cannot divide by zero. What if a value that you are expecting to be a number is instead a string?
 // Use try/catch and other logic to handle these types of errors gracefully.
 
 // If an assignment is not yet due, do not include it in the results or the average. Additionally, if the learner’s submission is late (submitted_at is past due_at), deduct 10 percent of the total points possible from their score for that assignment.
@@ -66,10 +31,9 @@
 // Create a function named getLearnerData() that accepts these values as parameters, in the order listed: (CourseInfo, AssignmentGroup, [LearnerSubmission]), and returns the formatted result, which should be an array of objects as described above.
 // You may use as many helper functions as you see fit.
 
-
 const CourseInfo = {
   id: 102,
-  name: "Fundamentals of Javascript "
+  name: "Fundamentals of Javascript ",
 };
 
 // The provided assignment group.
@@ -80,151 +44,205 @@ const AssignmentGroup = {
   course_id: 200,
   group_weight: 25,
   assignments: [
-
     {
       id: 1,
       name: "Using Loops",
       due_at: "10-05-2024",
-      points_possible: 50
+      points_possible: 50,
     },
     {
       id: 2,
       name: "Reusable Functions",
       due_at: "11-07-2024",
-      points_possible: 150
+      points_possible: 150,
     },
     {
       id: 3,
       name: "Uno Coding Game",
       due_at: "12-09-2024",
-      points_possible: 300
-    }
-  ]
+      points_possible: 300,
+    },
+  ],
 };
 
 // The provided learner submission data.
+
 const LearnerSubmissions = [
   {
     learner_id: 121,
     assignment_id: 1,
     submission: {
       submitted_at: "10-04-2024",
-      score: 47
-    }
+      score: 47,
+    },
   },
   {
     learner_id: 121,
     assignment_id: 2,
     submission: {
       submitted_at: "11-07-2024",
-      score: 150
-    }
+      score: 150,
+    },
   },
   {
     learner_id: 121,
     assignment_id: 3,
     submission: {
       submitted_at: "12-09-2024",
-      score: 300
-    }
+      score: 300,
+    },
   },
-    {
-      learner_id: 122,
-      assignment_id: 1,
-      submission: {
-        submitted_at: "10-07-2024",
-        score: 45
-      }
+  {
+    learner_id: 122,
+    assignment_id: 1,
+    submission: {
+      submitted_at: "10-07-2024",
+      score: 45,
     },
-    {
-      learner_id: 122,
-      assignment_id: 2,
-      submission: {
-        submitted_at: "11-07-2024",
-        score: 150
-      }
+  },
+  {
+    learner_id: 122,
+    assignment_id: 2,
+    submission: {
+      submitted_at: "11-07-2024",
+      score: 150,
     },
-    {
-      learner_id: 122,
-      assignment_id: 3,
-      submission: {
-        submitted_at: "12-9-2024",
-        score: 250
-      }
+  },
+  {
+    learner_id: 122,
+    assignment_id: 3,
+    submission: {
+      submitted_at: "12-9-2024",
+      score: 250,
     },
-      {
-        learner_id: 123,
-        assignment_id: 1,
-        submission: {
-          submitted_at: "10-05-2024",
-          score: 30
-        }
-      },
-      {
-        learner_id: 123,
-        assignment_id: 2,
-        submission: {
-          submitted_at: "11-8-2024",
-          score: 100
-        }
-      },
-      {
-        learner_id: 123,
-        assignment_id: 3,
-        submission: {
-          submitted_at: "12-9-2024",
-          score: 150
-        }
+  },
+  {
+    learner_id: 123,
+    assignment_id: 1,
+    submission: {
+      submitted_at: "10-05-2024",
+      score: 30,
+    },
+  },
+  {
+    learner_id: 123,
+    assignment_id: 2,
+    submission: {
+      submitted_at: "11-8-2024",
+      score: 100,
+    },
+  },
+  {
+    learner_id: 123,
+    assignment_id: 3,
+    submission: {
+      submitted_at: "12-9-2024",
+      score: 150,
+    },
   },
   {
     learner_id: 124,
     assignment_id: 1,
     submission: {
       submitted_at: "10-05-2024",
-      score: 20
-    }
+      score: 20,
+    },
   },
   {
     learner_id: 124,
     assignment_id: 2,
     submission: {
       submitted_at: "11-10-2024",
-      score: 140
-    }
+      score: 140,
+    },
   },
   {
     learner_id: 124,
     assignment_id: 3,
     submission: {
       submitted_at: "12-09-2024",
-      score: 280
-    }
+      score: 280,
+    },
   },
-    {
-      learner_id: 125,
-      assignment_id: 1,
-      submission: {
-        submitted_at: "10-05-2024",
-        score: 50
-      }
+  {
+    learner_id: 125,
+    assignment_id: 1,
+    submission: {
+      submitted_at: "10-05-2024",
+      score: 50,
     },
-    {
-      learner_id: 125,
-      assignment_id: 2,
-      submission: {
-        submitted_at: "11-7-2024",
-        score: 150
-      }
+  },
+  {
+    learner_id: 125,
+    assignment_id: 2,
+    submission: {
+      submitted_at: "11-7-2024",
+      score: 150,
     },
-    {
-      learner_id: 125,
-      assignment_id: 3,
-      submission: {
-        submitted_at: "12-09-2024",
-        score: 300
-      }
-  }
+  },
+  {
+    learner_id: 125,
+    assignment_id: 3,
+    submission: {
+      submitted_at: "12-09-2024",
+      score: 300,
+    },
+  },
 ];
 
-getLearnerData
+// // Part 1: Main rules
+// This code is to first validate that AssignmentGroup belongs to the correct Course Information
 
+function getLearnerData(CourseInfo, AssignmentGroup, learnerSubmissions) {
+  if (AssignmentGroup.course_id !== CourseInfo.id) {
+    throw new Error(
+      "AssignmentGroup does not belong to its course (mismatching course_id with CourseInfo.id)"
+    );
+  }
+
+  function validateAssignment(assignment) {
+    if (isNaN(assignment.points_possible) || assignment.points_possible <= 0) {
+      throw new Error(
+        `Invalid points possible for assignment ${assignment.id}`
+      );
+    }
+  }
+
+  const assignments = {};
+
+  for (const assignment of AssignmentGroup.assignments) {
+    try {
+      validateAssignment(assignment);
+      assignments[assignment.id] = assignment;
+    } catch (error) {
+      console.error(error.message);
+      break;
+    }
+  }
+
+  return assignments;
+}
+{
+}
+// Learner data
+let learnerData = {};
+for (let i = 0; i < learnerSubmission.length; i++) {
+  let submissin = learnerSubmissions[i];
+  let { learner_id, assignment_id, submission: sub } = submission;
+}
+
+const result = getLearnerData(CourseInfo, AssignmentGroup, []);
+console.log(result);
+
+// }
+//   let submission date = new date;
+
+// }
+
+// Part 2: calculate weighted average
+
+// function calculateWeightAverage (AssignmentGroup, learnerSubmissions){
+//   for (let i=0; LearnerSubmission.length; i+=1 )
+//   if
+
+// }
